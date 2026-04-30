@@ -1,0 +1,53 @@
+# 认知偏误审计与决策纠偏 Agent 群配置
+
+# LLM 配置
+llm:
+  model: "gpt-4-turbo-preview"
+  temperature: 0.1
+  max_tokens: 4096
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 2
+
+# OpenAI API 配置
+openai:
+  api_key: "${OPENAI_API_KEY}"
+  base_url: "${OPENAI_BASE_URL:https://api.openai.com/v1}"
+
+# 数据库配置
+database:
+  url: "sqlite:///./data/cogbias.db"
+  echo: false
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/cogbias.log"
+
+# Web UI 配置
+web_ui:
+  host: "0.0.0.0"
+  port: 8501
+  debug: false
+
+# Agent 配置
+agents:
+  agent_a:
+    max_iterations: 5
+    validation_strictness: "high"
+  agent_b:
+    bias_threshold: 0.7
+    max_biases_per_node: 3
+  agent_c:
+    challenge_intensity: "moderate"
+    max_questions: 3
+  agent_d:
+    report_format: "detailed"
+    save_history: true
+
+# 工作流配置
+workflow:
+  max_iterations: 10
+  timeout_minutes: 30
+  enable_parallel_processing: false

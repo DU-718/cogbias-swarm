@@ -1,0 +1,86 @@
+# 认知偏误审计与决策纠偏 Agent 群 Docker Compose 配置
+# 支持开发和生产环境部署
+
+version: '3.8'
+
+services:
+  cogbias-app:
+    build: .
+    container_name: cogbias-swarm
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      - LOG_LEVEL=INFO
+      - DATABASE_URL=sqlite:///./data/cogbias.db
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./checkpoints:/app/checkpoints
+      - ./config.yaml:/app/config.yaml
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; exit(0) if requests.get('http://localhost:8501/health', timeout=5).status_code == 200 else exit(1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cogbias.rule=Host(\"cogbias.example.com\")"
+      - "traefik.http.routers.cogbias.entrypoints=web"
+
+  # 可选: 添加 Redis 用于会话存储（生产环境）
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: cogbias-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   restart: unless-stopped
+
+  # 可选: 添加 Nginx 反向代理（生产环境）
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: cogbias-nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #     - ./ssl:/etc/nginx/ssl
+  #   depends_on:
+  #     - cogbias-app
+  #   restart: unless-stopped
+
+# 开发环境覆盖配置
+x-develop:
+  &dev-config
+  volumes:
+    - ./src:/app/src
+    - ./tests:/app/tests
+    - ./data:/app/data
+    - ./logs:/app/logs
+    - ./checkpoints:/app/checkpoints
+  environment:
+    - LOG_LEVEL=DEBUG
+    - DEBUG=true
+
+# 生产环境覆盖配置  
+x-production:
+  &prod-config
+  environment:
+    - LOG_LEVEL=WARNING
+    - DEBUG=false
+
+# 环境特定配置
+profiles:
+  - dev
+  - prod
+
+# 数据卷定义（如使用 Redis）
+# volumes:
+#   redis_data:
+#     driver: local
