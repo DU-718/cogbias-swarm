@@ -77,8 +77,9 @@ Thumbs.db
 *.log
 logs/
 
-# Data files
-data/
+# Data files (exclude contents but keep folder structure)
+data/*
+!data/.gitkeep
 
 # Temporary files
 *.tmp

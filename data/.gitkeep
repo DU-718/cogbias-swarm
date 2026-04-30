@@ -1,0 +1,10 @@
+# This file ensures that the data directory is tracked by Git
+# while ignoring all other files within the data directory
+# 
+# The data directory is used for storing:
+# - SQLite database files
+# - Temporary data files
+# - Session data
+# 
+# Actual data files should be excluded from version control
+# to avoid committing sensitive or large binary data
