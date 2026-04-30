@@ -1,122 +1,124 @@
 # 🧠 Cognitive Bias Audit & Decision Rectification Agent Swarm
 
-**认知偏误审计与决策纠偏 Agent 群**
+**Multi-language README available:**
+- [English Version](README.md) (current)
+- [中文版本](README_zh.md)
 
-一个企业级的多 Agent 协作系统，用于识别和纠正决策过程中的认知偏误。采用 LangGraph 框架实现四个专业 Agent 的有状态协作工作流。
+---
 
-## 🌟 核心特性
+## 🌟 Core Features
 
-- **🤖 多 Agent 协作**: 四个专业 Agent 分工协作，覆盖决策分析全流程
-- **🔍 智能偏误检测**: 内置 30+ 种认知偏误知识库，采用 Chain-of-Thought 推理
-- **⚔️ 对抗性挑战**: 生成尖锐的逻辑挑战问题，进行深度压力测试
-- **📊 实时可视化**: 三面板 Web UI，实时显示决策树、对话流和审计报告
-- **💾 数据持久化**: SQLite 数据库存储完整会话历史和偏误指纹
-- **🐳 容器化部署**: 完整的 Docker 支持，支持开发和生产环境
+- **🤖 Multi-Agent Collaboration**: Four specialized agents working collaboratively to cover the entire decision analysis process
+- **🔍 Intelligent Bias Detection**: Built-in knowledge base of 30+ cognitive biases using Chain-of-Thought reasoning
+- **⚔️ Adversarial Challenge**: Generates sharp logical challenge questions for deep stress testing
+- **📊 Real-time Visualization**: Three-panel web UI displaying decision trees, conversation flows, and audit reports
+- **💾 Data Persistence**: SQLite database stores complete session history and bias fingerprints
+- **🐳 Containerized Deployment**: Full Docker support for both development and production environments
 
-## 🏗️ 系统架构
+## 🏗️ System Architecture
 
-### Agent 分工
+### Agent Roles
 
-| Agent       | 角色          | 核心功能            |
-| ----------- | ----------- | --------------- |
-| **Agent A** | 决策构建追踪器     | 解析自然语言，构建结构化决策树 |
-| **Agent B** | 偏误模式匹配引擎    | 检测认知偏误，生成风险热力图  |
-| **Agent C** | 对抗性推理 Agent | 生成逻辑挑战问题，进行压力测试 |
-| **Agent D** | 元认知记录器      | 记录决策演变，生成审计报告   |
+| Agent       | Role                | Core Functionality           |
+| ----------- | ------------------- | ---------------------------- |
+| **Agent A** | Decision Tree Builder | Parses natural language, builds structured decision trees |
+| **Agent B** | Bias Pattern Matcher | Detects cognitive biases, generates risk heatmaps |
+| **Agent C** | Adversarial Challenger | Generates logical challenge questions for stress testing |
+| **Agent D** | Meta-Cognition Recorder | Records decision evolution, generates audit reports |
 
-### 技术栈
+### Technology Stack
 
-- **编程语言**: Python 3.11+
-- **多 Agent 框架**: LangGraph (选择理由：更灵活的状态管理和工作流控制)
-- **LLM 接口**: OpenAI API 兼容接口
-- **前端**: Streamlit Web UI
-- **数据库**: SQLite + SQLAlchemy
-- **配置管理**: YAML + 环境变量
-- **部署**: Docker + Docker Compose
+- **Programming Language**: Python 3.11+
+- **Multi-Agent Framework**: LangGraph (chosen for flexible state management and workflow control)
+- **LLM Interface**: OpenAI API compatible interface
+- **Frontend**: Streamlit Web UI
+- **Database**: SQLite + SQLAlchemy
+- **Configuration Management**: YAML + environment variables
+- **Deployment**: Docker + Docker Compose
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境要求
+### Prerequisites
 
 - Python 3.11+
 - OpenAI API Key
-- Docker (可选，用于容器化部署)
+- Docker (optional, for containerized deployment)
 
-### 安装步骤
+### Installation Steps
 
-1. **克隆项目**
+1. **Clone the Repository**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/DU-718/cogbias-swarm.git
 cd cogbias-swarm
 ```
 
-1. **安装依赖**
+2. **Install Dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-1. **配置环境变量**
+3. **Configure Environment Variables**
 
 ```bash
 cp .env.example .env
-# 编辑 .env 文件，设置您的 OpenAI API Key
+# Edit .env file and set your OpenAI API Key
 ```
 
-1. **运行应用**
+4. **Run the Application**
 
 ```bash
 streamlit run src/ui/app.py
 ```
 
-### Docker 部署
+### Docker Deployment
 
 ```bash
-# 构建镜像
+# Build the image
 docker build -t cogbias-swarm .
 
-# 运行容器
+# Run the container
 docker run -p 8501:8501 -e OPENAI_API_KEY=your_key cogbias-swarm
 
-# 或使用 Docker Compose
+# Or use Docker Compose
 docker-compose up -d
 ```
 
-## 📖 使用指南
+## 📖 User Guide
 
-### 基本工作流程
+### Basic Workflow
 
-1. **输入决策问题**: 在 Web UI 中输入您的决策描述
-2. **决策树构建**: Agent A 解析并构建结构化决策树
-3. **偏误检测**: Agent B 扫描决策树，识别认知偏误
-4. **对抗挑战**: Agent C 生成尖锐的逻辑挑战问题
-5. **用户回应**: 回答挑战问题，完善决策逻辑
-6. **迭代优化**: 系统根据回应更新决策树，循环检测
-7. **生成报告**: 最终生成完整的认知审计报告
+1. **Input Decision Problem**: Enter your decision description in the Web UI
+2. **Decision Tree Construction**: Agent A parses and builds structured decision trees
+3. **Bias Detection**: Agent B scans the decision tree to identify cognitive biases
+4. **Adversarial Challenge**: Agent C generates sharp logical challenge questions
+5. **User Response**: Answer challenge questions to improve decision logic
+6. **Iterative Optimization**: System updates decision tree based on responses, cycles detection
+7. **Report Generation**: Final comprehensive cognitive audit report
 
-### Web UI 界面
+### Web UI Interface
 
-系统提供三面板界面：
+The system provides a three-panel interface:
 
-- **左侧**: 决策树可视化（JSON 树形结构）
-- **中间**: 实时对话流（含偏误标记）
-- **右侧**: 审计报告预览和导出
+- **Left Panel**: Decision tree visualization (JSON tree structure)
+- **Center Panel**: Real-time conversation flow (with bias markers)
+- **Right Panel**: Audit report preview and export
 
-## 🔧 配置说明
+## 🔧 Configuration
 
-### 主要配置项
+### Main Configuration Items
 
-编辑 `config.yaml` 文件进行系统配置：
+Edit the `config.yaml` file for system configuration:
 
 ```yaml
-# LLM 配置
+# LLM Configuration
 llm:
   model: "gpt-4-turbo-preview"
   temperature: 0.1
   max_tokens: 4096
 
-# Agent 配置
+# Agent Configuration
 agents:
   agent_a:
     max_iterations: 5
@@ -125,153 +127,153 @@ agents:
   agent_c:
     challenge_intensity: "moderate"
 
-# 工作流配置
+# Workflow Configuration
 workflow:
   max_iterations: 10
   timeout_minutes: 30
 ```
 
-### 环境变量
+### Environment Variables
 
-重要环境变量（在 `.env` 中配置）：
+Important environment variables (configure in `.env`):
 
-- `OPENAI_API_KEY`: OpenAI API 密钥
-- `OPENAI_BASE_URL`: API 基础 URL（支持兼容接口）
-- `LOG_LEVEL`: 日志级别
-- `DATABASE_URL`: 数据库连接字符串
+- `OPENAI_API_KEY`: OpenAI API key
+- `OPENAI_BASE_URL`: API base URL (supports compatible interfaces)
+- `LOG_LEVEL`: Logging level
+- `DATABASE_URL`: Database connection string
 
-## 🧪 测试
+## 🧪 Testing
 
-运行单元测试：
+Run unit tests:
 
 ```bash
 pytest tests/ -v
 ```
 
-测试覆盖：
+Test coverage includes:
 
-- Agent 功能测试
-- 工作流状态管理测试
-- 数据持久化测试
-- 错误处理测试
+- Agent functionality tests
+- Workflow state management tests
+- Data persistence tests
+- Error handling tests
 
-## 📊 系统特性详解
+## 📊 System Features Detailed
 
-### 偏误检测能力
+### Bias Detection Capabilities
 
-系统内置 30+ 种常见认知偏误，包括：
+The system includes 30+ common cognitive biases:
 
-- **确认偏误**: 倾向于寻找支持已有信念的信息
-- **锚定偏误**: 过度依赖初始信息
-- **过度自信偏误**: 高估自己的知识和能力
-- **沉没成本谬误**: 因已投入而继续不理性投入
-- **群体思维**: 为达成共识压制异议
-- **后见之明偏误**: 认为结果本来就可预测
+- **Confirmation Bias**: Tendency to seek information that confirms existing beliefs
+- **Anchoring Bias**: Over-reliance on initial information
+- **Overconfidence Bias**: Overestimating one's own knowledge and abilities
+- **Sunk Cost Fallacy**: Continuing irrational investments due to previous investments
+- **Groupthink**: Suppressing dissent to reach consensus
+- **Hindsight Bias**: Believing outcomes were predictable after they occur
 
-### 决策树结构
+### Decision Tree Structure
 
-决策树采用分层结构：
+Decision trees use a hierarchical structure:
 
 ```
-结论节点 (结论)
-├── 前提节点 (事实/假设)
-│   ├── 证据节点 (推理类型 + 强度)
-│   └── 证据节点
-└── 前提节点
-    └── 证据节点
+Conclusion Node (Conclusion)
+├── Premise Node (Facts/Assumptions)
+│   ├── Evidence Node (Reasoning Type + Strength)
+│   └── Evidence Node
+└── Premise Node
+    └── Evidence Node
 ```
 
-### 审计报告内容
+### Audit Report Content
 
-最终审计报告包含：
+Final audit reports include:
 
-1. **决策演变摘要**: 初始 vs 最终决策对比
-2. **偏误暴露清单**: 检测到的偏误类型及频率
-3. **个人偏误指纹**: 用户的认知弱点分析
-4. **改进建议**: 针对性的决策改进策略
+1. **Decision Evolution Summary**: Initial vs final decision comparison
+2. **Bias Exposure List**: Detected bias types and frequencies
+3. **Personal Bias Fingerprint**: Analysis of user's cognitive weaknesses
+4. **Improvement Recommendations**: Targeted decision improvement strategies
 
-## 🔍 API 使用
+## 🔍 API Usage
 
-系统提供程序化 API 接口：
+The system provides programmatic API interfaces:
 
 ```python
 from src.core.graph import WorkflowManager
 import yaml
 
-# 加载配置
+# Load configuration
 with open('config.yaml') as f:
     config = yaml.safe_load(f)
 
-# 创建工作流管理器
+# Create workflow manager
 manager = WorkflowManager(config)
 
-# 创建新会话
-result = manager.create_session("我应该投资这个项目吗？")
+# Create new session
+result = manager.create_session("Should I invest in this project?")
 
-# 处理用户回应
+# Process user response
 response_result = manager.submit_response(
     session_id=result['session_id'],
-    response_text="我的回应内容",
+    response_text="My response content",
     question_id="question_123"
 )
 
-# 生成审计报告
+# Generate audit report
 report = manager.generate_audit_report(result['session_id'])
 ```
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### 常见问题
+### Common Issues
 
-1. **LLM 调用失败**
-   - 检查 API Key 配置
-   - 验证网络连接
-   - 查看日志文件
-2. **数据库连接错误**
-   - 检查数据库文件权限
-   - 验证数据库路径配置
-3. **Web UI 无法访问**
-   - 检查端口占用情况
-   - 验证 Streamlit 配置
+1. **LLM Call Failures**
+   - Check API Key configuration
+   - Verify network connection
+   - Check log files
+2. **Database Connection Errors**
+   - Check database file permissions
+   - Verify database path configuration
+3. **Web UI Access Issues**
+   - Check port availability
+   - Verify Streamlit configuration
 
-### 日志查看
+### Logs
 
-日志文件位置：`./logs/cogbias.log`
+Log file location: `./logs/cogbias.log`
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-欢迎贡献代码！请遵循以下步骤：
+Contributions are welcome! Please follow these steps:
 
-1. Fork 项目
-2. 创建特性分支
-3. 提交更改
-4. 推送到分支
-5. 创建 Pull Request
+1. Fork the project
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-### 开发规范
+### Development Standards
 
-- 遵循 PEP 8 代码风格
-- 为新增功能编写单元测试
-- 更新相关文档
-- 使用类型注解
+- Follow PEP 8 code style
+- Write unit tests for new features
+- Update relevant documentation
+- Use type annotations
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-- 感谢 LangChain 团队提供的优秀框架
-- 感谢认知科学领域的研究成果
-- 感谢所有贡献者和用户
+- Thanks to the LangChain team for the excellent framework
+- Thanks to research achievements in cognitive science
+- Thanks to all contributors and users
 
-## 📞 联系方式
+## 📞 Contact
 
-如有问题或建议，请通过以下方式联系：
+For questions or suggestions, please contact via:
 
-- 项目 Issues: \[GitHub Issues]&#x20;
-- 文档: \[项目 Wiki]
+- Project Issues: [GitHub Issues]
+- Documentation: [Project Wiki]
 
 ***
 
-**🧠 做出更好的决策，从识别认知偏误开始**
+**🧠 Make better decisions by identifying cognitive biases**
